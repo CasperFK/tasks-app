@@ -1,0 +1,145 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+button {
+    display: inline-block;
+}
+
+
+section {
+    height: 60vh;
+    width: 80vw;
+    margin: 30px auto 0 auto;
+    background-color: ghostwhite;
+}
+
+
+section.inputTasks {
+    height: auto;
+    display: block;
+    margin: 30px auto 0;
+    padding: 0 5%;
+}
+
+section.inputTasks input {
+    width: 90%;
+}
+
+section.inputTasks #listenClickNewTask1 {
+    width: 90%;
+}
+
+
+div.panelButtons {
+    display: inline-block;
+    width: 30%;
+    margin: 5% 0 5% 5%;
+    float: left;
+}
+
+div.panelButtons > article > p {
+    font-size: 22px;
+    text-align: center;
+    background-color: burlywood;
+}
+
+div.panelButtons > article > ul > li {
+    display: block;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    font-size: 18px;
+    text-align: center;
+    border: 2px solid gray;
+    transition: 0.3s;
+}
+div.panelButtons > article > ul > li:hover {
+    border-color: seashell;
+    color: seashell;
+    background-color: gray;
+    cursor: default;
+}
+
+
+div.sectionSelect {
+    display: inline-block;
+    height: 100%;
+    width: 55%;
+    margin: 0 5% 0 5%;
+}
+div.sectionSelect > p {
+    font-size: 28px;
+    text-align: center;
+    line-height: 150%;
+}
+
+div.sectionSelect > select > option {
+    padding: 2px 20px;
+    color: darkslategray;
+    background-color: #d6ffac;
+}
+div.sectionSelect > select > option:nth-child(even) {
+    color: #d6ffac;
+    background-color: darkslategray;
+}
+
+
+
+
+
+section.sectionNewTasks {
+    display: block;
+}
+section.sectionDoneTasks {
+    display: none;
+}
+section.sectionDeleteTasks {
+    display: none;
+}
+
+.moreInformation {
+    display: none;
+}
+.editMoreInformation {
+    display: none;
+}
+
+.editMoreInformation input  {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.editMoreInformation button {
+    width: 50%;
+    margin: 5px auto;
+}
+
+.editMoreInformation p {
+    width: 80%;
+    margin: 0 auto;
+    
+}
+
+#moreInformationTask input:nth-child(6) {
+    height: 50px;
+}
+
+.addMoreInformation{
+    display: none;
+}
+
+
+select {
+    justify-self: center;
+    height: 35vh;
+    color: white;
+    font-size: 18px;
+    width: 100%;
+    overflow: auto;
+    -webkit-appearance: listitem;
+    background-color: gray;
+}
+
+

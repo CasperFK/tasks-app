@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Title</title>
+		<link rel="stylesheet" href="css/style.css" />
+	</head>
+	<body>
+		<section class="inputTasks">
+			<p>Wprowadź zadanie:</p>
+			<input id="inputValueTask" type="text" />
+			<button id="clearAddTask" title="clean">X</button>
+			<button id="listenClickNewTask1">Dodaj zadanie:</button>
+		</section>
+		<div class="centerTaskWrapper">
+			<div class="taskWrapper">
+                <section class="sectionNewTasks">
+                    <div class="panelButtons">
+                        <article class="panelButonsSection1">
+                            <p class="infoAboutOptionTaskApp">Okno: </p>
+                            <ul>
+                                <li class="chooseOptionSectionNew">Do zrobienia</li>
+                                <li class="chooseOptionSectionDone">Zakończone</li>
+                                <li class="chooseOptionSectionDelete">Usunięte</li>
+                            </ul>
+                        </article>
+                        <article class="panelButonsSection2">
+                            <p class="infoAboutOptionTaskButton">Zdanie:</p>
+                            <ul>
+                                <li id="listenClickDoneTask1">Przenieś do ukończonych</li>
+                                <li id="listenClickDeleteTask1">Przenieś do usuniętych</li>
+                                <li class="showMoreInformationAboutThisTask">Pokaż szczegóły</li>
+                                <li class="showPanelWhoEditThisTask">Edytuj zadanie</li>
+                            </ul>
+                        </article>
+                    </div>
+                    <div class="sectionSelect">
+                        <p>Do zrobienia:</p>
+                        <select name="task" id="listTasks" size="10"> </select>
+                    </div>
+				</section>
+				<section class="moreInformation">
+					<p>Szczegóły:</p>
+					<div id="moreInformationAboutTask">
+						<p>Tytuł zadania:</p>
+						<h2 id="taskTitle"></h2>
+						<p>Czas dodania zadania:</p>
+						<p id="timeAddTask"></p>
+						<p>Termin ukończenia zadania:</p>
+						<p id="timeCompleteTask"></p>
+						<p>Szczegółowy opis:</p>
+						<p id="moreInfoAboutTask"></p>
+						<p>Link:</p>
+						<p id="taskLink"></p>
+						<p>E-mail:</p>
+						<p id="taskMail"></p>
+						<p>Telefon kontaktowy:</p>
+						<p id="taskTel"></p>
+					</div>
+					<button id="editTask">Edytuj</button>
+				</section>
+				<section class="editMoreInformation">
+					<p>Szczegóły:</p>
+					<form id="moreInformationTask">
+						<h2 id="taksTitleMoreInformation"></h2>
+						<p id="timeTimeAddTask">Czas dodania zadania:</p>
+						<p>Termin ukończenia zadania</p>
+						<input type="date" />
+						<p>Szczegółowy opis</p>
+						<input type="text" title="description" />
+						<p>Link</p>
+						<input type="text" />
+						<p>E-mail</p>
+						<input type="email" />
+						<p>Telefon kontaktowy</p>
+						<input type="tel" />
+						<button type="submit">Zapisz</button>
+					</form>
+				</section>
+                <section class="sectionDoneTasks">
+                    <div class="panelButtons">
+                        <article class="panelButonsSection1">
+                            <p class="infoAboutOptionTaskApp">Program</p>
+                            <ul>
+                                <li class="chooseOptionSectionNew">Do zrobienia</li>
+                                <li class="chooseOptionSectionDone">Zakończone</li>
+                                <li class="chooseOptionSectionDelete">Usunięte</li>
+                            </ul>
+                        </article>
+                        <article class="panelButonsSection2">
+                            <p class="infoAboutOptionTaskButton">Zdanie:</p>
+                            <ul>
+                                <li id="listenClickNewTask2">Przenieś do nowych</li>
+                                <li id="listenClickDeleteTask2">Przenieś do usuniętych</li>
+                                <li class="showMoreInformationAboutThisTask">Pokaż szczegóły</li>
+                                <li class="showPanelWhoEditThisTask">Edytuj zadanie</li>
+                            </ul>
+                        </article>
+                    </div>
+                    <div class="sectionSelect">
+                        <p>Zrobione:</p>
+                        <select name="task" id="doneTasks" size="10"> </select>
+                    </div>
+				</section>
+				<section class="sectionDeleteTasks">
+                    <div class="panelButtons">
+                        <article class="panelButonsSection1">
+                            <p class="infoAboutOptionTaskApp">Program</p>
+                            <ul>
+                                <li class="chooseOptionSectionNew">Do zrobienia</li>
+                                <li class="chooseOptionSectionDone">Zakończone</li>
+                                <li class="chooseOptionSectionDelete">Usunięte</li>
+                            </ul>
+                        </article>
+                        <article class="panelButonsSection2">
+                            <p class="infoAboutOptionTaskButton">Zdanie:</p>
+                            <ul>
+                                <li id="listenClickNewTask3">Przenieś do nowych</li>
+                                <li id="listenClickDoneTask3">Przenieś do ukończonych</li>
+                                <li class="showMoreInformationAboutThisTask">Pokaż szczegóły</li>
+                                <li class="showPanelWhoEditThisTask">Edytuj zadanie</li>
+                            </ul>
+                        </article>
+                    </div>
+                    <div class="sectionSelect">
+                        <p>Usunięte:</p>
+                        <select name="task" id="deleteTasks" size="10"> </select>
+                    </div>
+				</section>
+			</div>
+		</div>
+
+		<script src="js/main.js"></script>
+	</body>
+</html>
