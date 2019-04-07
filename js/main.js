@@ -1,6 +1,6 @@
-const listNewTasks = document.getElementById('listTasks'); //secja do zrobienia
-const listDoneTasks = document.getElementById('doneTasks'); //sekcja ukończone
-const listDeleteTasks = document.getElementById('deleteTasks'); // sekcja usunięte
+const listNewTasks = document.getElementById('listTasks'); //secja select do zrobienia
+const listDoneTasks = document.getElementById('doneTasks'); //sekcja select ukończone
+const listDeleteTasks = document.getElementById('deleteTasks'); // sekcja select usunięte
 const sectionNewTasks = document.getElementsByClassName('sectionNewTasks');
 const sectionDoneTasks = document.getElementsByClassName('sectionDoneTasks');
 const sectionDeleteTasks = document.getElementsByClassName('sectionDeleteTasks');
@@ -96,12 +96,45 @@ buttonAddNewTask.addEventListener('click', addNTask, false);
 const selectTaskInSections = (e) => {
   selectTask = e.target;
   selectTaskID = e.target.id;
-
 };
 
 listNewTasks.addEventListener('click', selectTaskInSections, false);
 listDoneTasks.addEventListener('click', selectTaskInSections, false);
 listDeleteTasks.addEventListener('click', selectTaskInSections, false);
+
+const moveSelectTask = (taskSelectID, cel) => {
+    const x = document.getElementById(taskSelectID);
+    console.log(x);
+    console.log(x.value);
+    const y = x.value;
+    if (y !== '') {
+        cel.innerHTML += "<option id=" + x.id + ">" + y + "</option>";
+    }
+    else alert('Najpierw wybierz zadanie!');
+    x.remove(x.selectedIndex);
+};
+
+const doneFunTask = () => moveSelectTask(selectTaskID, listDoneTasks);
+const deleteFunTask = () => moveSelectTask(selectTaskID, listDeleteTasks);
+
+const newFunTask2 = () => moveSelectTask(selectTaskID, listNewTasks);
+const deleteFunTask2 = () => moveSelectTask(selectTaskID, listDeleteTasks);
+
+const newFunTask3 = () => moveSelectTask(selectTaskID, listNewTasks);
+const doneFunTask3 = () => moveSelectTask(selectTaskID, listDoneTasks);
+
+document.getElementById('clearAddTask').addEventListener("click", clearAddTask, false);
+document.getElementById('listenClickNewTask1').addEventListener("click", addNTask, false);
+
+document.getElementById('listenClickDoneTask1').addEventListener("click",doneFunTask, false );
+document.getElementById('listenClickDeleteTask1').addEventListener("click",deleteFunTask, false );
+
+document.getElementById('listenClickNewTask2').addEventListener("click", newFunTask2, false);
+document.getElementById('listenClickDeleteTask2').addEventListener("click",deleteFunTask2, false );
+
+document.getElementById('listenClickNewTask3').addEventListener("click", newFunTask3, false);
+document.getElementById('listenClickDoneTask3').addEventListener("click",doneFunTask3, false );
+
 
 // sectionNewTasks || sectionDoneTasks || sectionDeleteTasks
 const showChoosePanel = (e) => {
