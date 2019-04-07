@@ -105,8 +105,6 @@ listDeleteTasks.addEventListener('click', selectTaskInSections, false);
 const moveSelectTask = (taskSelectID, cel, taskStatus) => {
     if (selectTaskID !== null) {
         const x = document.getElementById(taskSelectID);
-        console.log(x);
-        console.log(x.value);
         const y = x.value;
 
         if (y !== '') {
@@ -149,7 +147,6 @@ const showChoosePanel = (e) => {
     editMoreInformationSection.style.display = 'none';
     moreInformationSection.style.display = 'none';
     const choose = e.target.getAttribute('typepanel');
-    console.log(choose);
     const changeView = (chooseButton) => {
         const beforePanelDisplay = document.querySelector('.'+openPanel);
         beforePanelDisplay.style.display = 'none';
@@ -220,7 +217,6 @@ optionWhoShowPanelWithMoreInformationAboutSelectTask[2].addEventListener('click'
 
 const saveEditTask = (e) => {
     e.preventDefault();
-    console.log(e.target.children[12]);
     flagaSaveEditTask = true;
     wyswietlSzczegolyLubEdytuj(e.target.children[12]);
     return flagaSaveEditTask;
@@ -230,7 +226,6 @@ formEditTask.addEventListener('submit', saveEditTask, false);
 
 const exitShowMoreInformationAboutSelectTask = (e) => {
     moreInformationSection.style.display = 'none';
-    console.log(openPanel);
     const afterPanel = document.getElementsByClassName(openPanel);
     afterPanel[0].style.display = 'block';
 };
