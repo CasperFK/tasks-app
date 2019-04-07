@@ -8,13 +8,16 @@ const buttonEditInformation = document.querySelector('#editTask'); // button do 
 const formEditTask = document.querySelector('#moreInformationTask'); // formularz edycji szczegółowych informacji o zadaniu
 const optionWhoShowPanelWithMoreInformationAboutSelectTask = document.querySelector('.showMoreInformationAboutThisTask');
 const optionWhoShowPanelWithEditorSelectTask = document.querySelector('.showPanelWhoEditThisTask');
-const showSectionNewTasks = document.querySelector('.chooseOptionSectionNew');
-const showSectionDoneTasks = document.querySelector('.chooseOptionSectionDone');
-const showSectionDeleteTasks = document.querySelector('.chooseOptionSectionDelete');
+const showSectionNewTasks = document.getElementsByClassName('chooseOptionSectionNew');
+const showSectionDoneTasks = document.getElementsByClassName('chooseOptionSectionDone');
+const showSectionDeleteTasks = document.getElementsByClassName('chooseOptionSectionDelete');
 
 let selectTask = null; //wybrne bieżace zadanie
 let selectTaskID = null; //bieżace id zadania
 let table = null; // tablica zadań
+
+// typePanel="sectionNewTasks" || typePanel="sectionDoneTasks" || typePanel="sectionDeleteTasks"
+let openPanel = 'sectionNewTasks'; // sectionNewTasks || sectionDoneTasks || sectionDeleteTasks
 
 let searchID = null;
 let iteratorTaskID = 1;
@@ -47,14 +50,22 @@ const searchChooseObjectInTable = (taskID) => {
   })
 };
 
-function  generatorTaskID (iteratorTaskID) {
-	let title = "task-";
-	taskID = title + iteratorTaskID;
-	return iteratorTaskID;
-}
+// funckja strzałkowa do wyczyszczenia inputa "Wprowadż zadanie"
+const clearAddTask = () => {
+    document.getElementById('inputValueTask').value = "";
+};
+
+document.getElementById('clearAddTask').addEventListener("click", clearAddTask, false);
+
 
 // funkcja strzałkowa tworzy nowe zadanie oraz dodaje je do listy "Do zrobienia"
 const addNTask = () => {
+    function  generatorTaskID (iteratorTaskID) {
+        let title = "task-";
+        taskID = title + iteratorTaskID;
+        return iteratorTaskID;
+    }
+
 	generatorTaskID(iteratorTaskID);
 	iteratorTaskID = iteratorTaskID + 1;
      // generujemy datę nowego zadania
@@ -90,13 +101,50 @@ listNewTasks.addEventListener('click', selectTaskInSections, false);
 listDoneTasks.addEventListener('click', selectTaskInSections, false);
 listDeleteTasks.addEventListener('click', selectTaskInSections, false);
 
-// funckja strzałkowa do wyczyszczenia inputa "Wprowadż zadanie"
-const clearAddTask = () => {
-    document.getElementById('inputValueTask').value = "";
+// sectionNewTasks || sectionDoneTasks || sectionDeleteTasks
+const showChoosePanel = (e) => {
+    const choose = e.target.getAttribute('typepanel');
+    console.log(choose);
+    const changeView = (chooseButton) => {
+        const beforePanelDisplay = document.querySelector('.'+openPanel);
+        beforePanelDisplay.style.display = 'none';
+        const afterPanelDisplay = document.querySelector('.'+chooseButton);
+        afterPanelDisplay.style.display = 'block';
+        openPanel = chooseButton;
+        return openPanel;
+    };
+    if (openPanel !== choose) {
+        if (choose === 'sectionNewTasks') {
+            changeView(choose);
+        }
+        else if (choose === 'sectionDoneTasks') {
+            changeView(choose);
+        }
+        else if (choose === 'sectionDeleteTasks') {
+            changeView(choose);
+        }
+    } else {
+        alert("Już masz otwarty ten panel!");
+    }
 };
 
-document.getElementById('clearAddTask').addEventListener("click", clearAddTask, false);
+showSectionNewTasks[0].addEventListener('click', showChoosePanel, false);
+showSectionDoneTasks[0].addEventListener('click', showChoosePanel, false);
+showSectionDeleteTasks[0].addEventListener('click', showChoosePanel, false);
 
+showSectionNewTasks[1].addEventListener('click', showChoosePanel, false);
+showSectionDoneTasks[1].addEventListener('click', showChoosePanel, false);
+showSectionDeleteTasks[1].addEventListener('click', showChoosePanel, false);
+
+showSectionNewTasks[2].addEventListener('click', showChoosePanel, false);
+showSectionDoneTasks[2].addEventListener('click', showChoosePanel, false);
+showSectionDeleteTasks[2].addEventListener('click', showChoosePanel, false);
+
+
+
+
+
+//---------------------------------------------------------------------------------------------------------------
 const wyswietlSzczegolyLubEdytuj = () => { //wyświetla panel ze szczegółami o wybranym zadaniu lub panel o edycji wybranego zadania
     if (moreInformationSection.style.display === 'none') {
         moreInformationSection.style.display = 'block';
@@ -116,3 +164,6 @@ const saveEditTask = (e) => {
 };
 
 formEditTask.addEventListener('submit', saveEditTask, false);
+
+
+
