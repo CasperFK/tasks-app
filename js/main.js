@@ -48,9 +48,9 @@ const createNewTaskObject = (id, nameTask, timeCreateTask, timeEndTask, taskStat
 const searchChooseObjectInTable = (taskID) => {
   table.forEach((e, id) => {
       if (e[0] === taskID) {
-      	searchID = id;
-      	return searchID;
-	  }
+          searchID = id;
+          return searchID;
+      }
   })
 };
 
@@ -102,26 +102,34 @@ listNewTasks.addEventListener('click', selectTaskInSections, false);
 listDoneTasks.addEventListener('click', selectTaskInSections, false);
 listDeleteTasks.addEventListener('click', selectTaskInSections, false);
 
-const moveSelectTask = (taskSelectID, cel) => {
-    const x = document.getElementById(taskSelectID);
-    console.log(x);
-    console.log(x.value);
-    const y = x.value;
-    if (y !== '') {
-        cel.innerHTML += "<option id=" + x.id + ">" + y + "</option>";
-    }
-    else alert('Najpierw wybierz zadanie!');
-    x.remove(x.selectedIndex);
+const moveSelectTask = (taskSelectID, cel, taskStatus) => {
+    if (selectTaskID !== null) {
+        const x = document.getElementById(taskSelectID);
+        console.log(x);
+        console.log(x.value);
+        const y = x.value;
+
+        if (y !== '') {
+            searchChooseObjectInTable(x.id);
+            cel.innerHTML += "<option id=" + x.id + ">" + y + "</option>";
+            const xz = (taskStatus) => {
+                table[searchID][1]["task-status"] = taskStatus;
+            };
+            xz(taskStatus);
+            selectTaskID = null;
+        } else alert('Najpierw wybierz zadanie!');
+        x.remove(x.selectedIndex);
+    }else alert('Najpierw wybierz zadanie!');
 };
 
-const doneFunTask = () => moveSelectTask(selectTaskID, listDoneTasks);
-const deleteFunTask = () => moveSelectTask(selectTaskID, listDeleteTasks);
+const doneFunTask = () => moveSelectTask(selectTaskID, listDoneTasks, 'close');
+const deleteFunTask = () => moveSelectTask(selectTaskID, listDeleteTasks, 'delete');
 
-const newFunTask2 = () => moveSelectTask(selectTaskID, listNewTasks);
-const deleteFunTask2 = () => moveSelectTask(selectTaskID, listDeleteTasks);
+const newFunTask2 = () => moveSelectTask(selectTaskID, listNewTasks, 'open');
+const deleteFunTask2 = () => moveSelectTask(selectTaskID, listDeleteTasks, 'delete');
 
-const newFunTask3 = () => moveSelectTask(selectTaskID, listNewTasks);
-const doneFunTask3 = () => moveSelectTask(selectTaskID, listDoneTasks);
+const newFunTask3 = () => moveSelectTask(selectTaskID, listNewTasks, 'open');
+const doneFunTask3 = () => moveSelectTask(selectTaskID, listDoneTasks, 'close');
 
 document.getElementById('clearAddTask').addEventListener("click", clearAddTask, false);
 document.getElementById('listenClickNewTask1').addEventListener("click", addNTask, false);
