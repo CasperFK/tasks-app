@@ -14,6 +14,7 @@ const optionWhoShowPanelWithEditorSelectTask = document.getElementsByClassName('
 const showSectionNewTasks = document.getElementsByClassName('chooseOptionSectionNew');
 const showSectionDoneTasks = document.getElementsByClassName('chooseOptionSectionDone');
 const showSectionDeleteTasks = document.getElementsByClassName('chooseOptionSectionDelete');
+const buttonExitShowMoreInformation = document.getElementById('exitShowMoreInformation');
 
 let selectTask = null; //wybrne bieżace zadanie
 let selectTaskID = null; //bieżace id zadania
@@ -157,8 +158,6 @@ const wyswietlSzczegolyLubEdytuj = (e) => { //wyświetla panel ze szczegółami 
         sectionNewTasks[0].style.display = 'none';
         sectionDoneTasks[0].style.display = 'none';
         sectionDeleteTasks[0].style.display = 'none';
-        openPanel = 'moreInformation';
-        return openPanel;
     }
     else if (flagButton === 'editInfo'){
         moreInformationSection.style.display = 'none';
@@ -166,8 +165,6 @@ const wyswietlSzczegolyLubEdytuj = (e) => { //wyświetla panel ze szczegółami 
         sectionNewTasks[0].style.display = 'none';
         sectionDoneTasks[0].style.display = 'none';
         sectionDeleteTasks[0].style.display = 'none';
-        openPanel = 'editMoreInformation';
-        return openPanel;
     }
 };
 
@@ -189,3 +186,12 @@ const saveEditTask = (e) => {
 };
 
 formEditTask.addEventListener('submit', saveEditTask, false);
+
+const exitShowMoreInformationAboutSelectTask = (e) => {
+    moreInformationSection.style.display = 'none';
+    console.log(openPanel);
+    const afterPanel = document.getElementsByClassName(openPanel);
+    afterPanel[0].style.display = 'block';
+};
+
+buttonExitShowMoreInformation.addEventListener('click', exitShowMoreInformationAboutSelectTask, false);

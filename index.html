@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 	<head>
 		<meta charset="UTF-8" />
 		<title>Title</title>
@@ -40,12 +40,19 @@
                     </div>
 				</section>
 				<section class="moreInformation">
-					<p>Szczegóły:</p>
-					<div id="moreInformationAboutTask">
-						<p>Tytuł zadania:</p>
-						<h2 id="taskTitle"></h2>
+					<header>
+                        <button id="exitShowMoreInformation">X</button>
+                        <h2>Szczegóły:</h2>
+                    </header>
+                    <main id="moreInformationAboutTask">
+                        <p>Tytuł zadania:</p>
+						<p id="taskTitle"></p>
+                        <p>Stan zadania: </p>
+                        <p id="taskStatus"></p>
 						<p>Czas dodania zadania:</p>
 						<p id="timeAddTask"></p>
+                        <p>Autor: </p>
+                        <p id="taskAutor"></p>
 						<p>Termin ukończenia zadania:</p>
 						<p id="timeCompleteTask"></p>
 						<p>Szczegółowy opis:</p>
@@ -56,8 +63,10 @@
 						<p id="taskMail"></p>
 						<p>Telefon kontaktowy:</p>
 						<p id="taskTel"></p>
-					</div>
-					<button id="editTask" flagbutton="editInfo">Edytuj</button>
+					</main>
+                    <footer>
+                        <button id="editTask" flagbutton="editInfo">Edytuj</button>
+                    </footer>
 				</section>
 				<section class="editMoreInformation">
 					<p>Szczegóły:</p>
