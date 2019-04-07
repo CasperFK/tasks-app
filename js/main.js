@@ -1,13 +1,16 @@
 const listNewTasks = document.getElementById('listTasks'); //secja do zrobienia
 const listDoneTasks = document.getElementById('doneTasks'); //sekcja ukończone
 const listDeleteTasks = document.getElementById('deleteTasks'); // sekcja usunięte
+const sectionNewTasks = document.getElementsByClassName('sectionNewTasks');
+const sectionDoneTasks = document.getElementsByClassName('sectionDoneTasks');
+const sectionDeleteTasks = document.getElementsByClassName('sectionDeleteTasks');
 const buttonAddNewTask = document.getElementById('listenClickNewTask1'); // buton dodaj nowe zadanie
 const moreInformationSection = document.querySelector('.moreInformation'); // sekcja moreInformation (panel który wyświetla informacje wybranego zadania)
 const editMoreInformationSection = document.querySelector('.editMoreInformation');  // sekcja editMoreInformation (panel który wyświetla formularz do edycji wybranego zadania)
 const buttonEditInformation = document.querySelector('#editTask'); // button do edycji bieżacego zadania
 const formEditTask = document.querySelector('#moreInformationTask'); // formularz edycji szczegółowych informacji o zadaniu
-const optionWhoShowPanelWithMoreInformationAboutSelectTask = document.querySelector('.showMoreInformationAboutThisTask');
-const optionWhoShowPanelWithEditorSelectTask = document.querySelector('.showPanelWhoEditThisTask');
+const optionWhoShowPanelWithMoreInformationAboutSelectTask = document.getElementsByClassName('showMoreInformationAboutThisTask');
+const optionWhoShowPanelWithEditorSelectTask = document.getElementsByClassName('showPanelWhoEditThisTask');
 const showSectionNewTasks = document.getElementsByClassName('chooseOptionSectionNew');
 const showSectionDoneTasks = document.getElementsByClassName('chooseOptionSectionDone');
 const showSectionDeleteTasks = document.getElementsByClassName('chooseOptionSectionDelete');
@@ -15,7 +18,7 @@ const showSectionDeleteTasks = document.getElementsByClassName('chooseOptionSect
 let selectTask = null; //wybrne bieżace zadanie
 let selectTaskID = null; //bieżace id zadania
 let table = null; // tablica zadań
-
+let flagaSaveEditTask = false;
 // typePanel="sectionNewTasks" || typePanel="sectionDoneTasks" || typePanel="sectionDeleteTasks"
 let openPanel = 'sectionNewTasks'; // sectionNewTasks || sectionDoneTasks || sectionDeleteTasks
 
@@ -57,7 +60,6 @@ const clearAddTask = () => {
 
 document.getElementById('clearAddTask').addEventListener("click", clearAddTask, false);
 
-
 // funkcja strzałkowa tworzy nowe zadanie oraz dodaje je do listy "Do zrobienia"
 const addNTask = () => {
     function  generatorTaskID (iteratorTaskID) {
@@ -73,7 +75,6 @@ const addNTask = () => {
     const timeAddTask = new Date(),
         timeGetAddTask = +timeAddTask.getDate() + '-' + 0 + (timeAddTask.getMonth() + 1) + '-' + timeAddTask.getFullYear(),
         valueInputAddNewTask = document.getElementById('inputValueTask').value; // pobieramy nazwe nowego zadania z inputa
-
 
     if (table !== null) {
 		if (valueInputAddNewTask !== '') { //sprawdzamy czy input nowego zadania nie jest pusty
@@ -103,6 +104,8 @@ listDeleteTasks.addEventListener('click', selectTaskInSections, false);
 
 // sectionNewTasks || sectionDoneTasks || sectionDeleteTasks
 const showChoosePanel = (e) => {
+    editMoreInformationSection.style.display = 'none';
+    moreInformationSection.style.display = 'none';
     const choose = e.target.getAttribute('typepanel');
     console.log(choose);
     const changeView = (chooseButton) => {
@@ -131,39 +134,58 @@ const showChoosePanel = (e) => {
 showSectionNewTasks[0].addEventListener('click', showChoosePanel, false);
 showSectionDoneTasks[0].addEventListener('click', showChoosePanel, false);
 showSectionDeleteTasks[0].addEventListener('click', showChoosePanel, false);
-
 showSectionNewTasks[1].addEventListener('click', showChoosePanel, false);
 showSectionDoneTasks[1].addEventListener('click', showChoosePanel, false);
 showSectionDeleteTasks[1].addEventListener('click', showChoosePanel, false);
-
 showSectionNewTasks[2].addEventListener('click', showChoosePanel, false);
 showSectionDoneTasks[2].addEventListener('click', showChoosePanel, false);
 showSectionDeleteTasks[2].addEventListener('click', showChoosePanel, false);
 
-
-
-
-
 //---------------------------------------------------------------------------------------------------------------
-const wyswietlSzczegolyLubEdytuj = () => { //wyświetla panel ze szczegółami o wybranym zadaniu lub panel o edycji wybranego zadania
-    if (moreInformationSection.style.display === 'none') {
-        moreInformationSection.style.display = 'block';
-        editMoreInformationSection.style.display = 'none';
+const wyswietlSzczegolyLubEdytuj = (e) => { //wyświetla panel ze szczegółami o wybranym zadaniu lub panel o edycji wybranego zadania
+    // flagbutton="moreInfo" || flagbutton="editInfo" || flagbutton="buttonEditInfoInMoreInfo" || flagbutton="showMoreInfoInEditInfo"
+    let flagButton = null;
+    if (flagaSaveEditTask === false ){
+        flagButton = e.target.getAttribute('flagbutton');
+    } else {
+        flagButton = e.getAttribute('flagbutton');
+        flagaSaveEditTask = false;
     }
-    else {
+    if (flagButton === 'moreInfo') {
+        moreInformationSection.style.display = 'block'; // =>
+        editMoreInformationSection.style.display = 'none';
+        sectionNewTasks[0].style.display = 'none';
+        sectionDoneTasks[0].style.display = 'none';
+        sectionDeleteTasks[0].style.display = 'none';
+        openPanel = 'moreInformation';
+        return openPanel;
+    }
+    else if (flagButton === 'editInfo'){
         moreInformationSection.style.display = 'none';
-        editMoreInformationSection.style.display = 'block';
+        editMoreInformationSection.style.display = 'block'; // =>
+        sectionNewTasks[0].style.display = 'none';
+        sectionDoneTasks[0].style.display = 'none';
+        sectionDeleteTasks[0].style.display = 'none';
+        openPanel = 'editMoreInformation';
+        return openPanel;
     }
 };
 
 buttonEditInformation.addEventListener('click', wyswietlSzczegolyLubEdytuj, false);
 
+optionWhoShowPanelWithEditorSelectTask[0].addEventListener('click', wyswietlSzczegolyLubEdytuj, false);
+optionWhoShowPanelWithMoreInformationAboutSelectTask[0].addEventListener('click', wyswietlSzczegolyLubEdytuj, false);
+optionWhoShowPanelWithEditorSelectTask[1].addEventListener('click', wyswietlSzczegolyLubEdytuj, false);
+optionWhoShowPanelWithMoreInformationAboutSelectTask[1].addEventListener('click', wyswietlSzczegolyLubEdytuj, false);
+optionWhoShowPanelWithEditorSelectTask[2].addEventListener('click', wyswietlSzczegolyLubEdytuj, false);
+optionWhoShowPanelWithMoreInformationAboutSelectTask[2].addEventListener('click', wyswietlSzczegolyLubEdytuj, false);
+
 const saveEditTask = (e) => {
     e.preventDefault();
-    wyswietlSzczegolyLubEdytuj();
+    console.log(e.target.children[12]);
+    flagaSaveEditTask = true;
+    wyswietlSzczegolyLubEdytuj(e.target.children[12]);
+    return flagaSaveEditTask;
 };
 
 formEditTask.addEventListener('submit', saveEditTask, false);
-
-
-
