@@ -57,11 +57,14 @@ function  generatorTaskID (iteratorTaskID) {
 const addNTask = () => {
 	generatorTaskID(iteratorTaskID);
 	iteratorTaskID = iteratorTaskID + 1;
-    const timeAddTask = new Date(); // generujemy datę nowego zadania
-    timeGetAddTask = + timeAddTask.getDate() + '-' + 0+(timeAddTask.getMonth()+1) + '-' + timeAddTask.getFullYear(); // konwertujemy datę to aplikacji
-    const valueInputAddNewTask = document.getElementById('inputValueTask').value; // pobieramy nazwe nowego zadania z inputa
+     // generujemy datę nowego zadania
+// konwertujemy datę to aplikacji
+    const timeAddTask = new Date(),
+        timeGetAddTask = +timeAddTask.getDate() + '-' + 0 + (timeAddTask.getMonth() + 1) + '-' + timeAddTask.getFullYear(),
+        valueInputAddNewTask = document.getElementById('inputValueTask').value; // pobieramy nazwe nowego zadania z inputa
 
-	if (table !== null) {
+
+    if (table !== null) {
 		if (valueInputAddNewTask !== '') { //sprawdzamy czy input nowego zadania nie jest pusty
 			createNewTaskObject( taskID, valueInputAddNewTask, timeGetAddTask, '', 'open', '', '', '', '', ''); // tworzenie nowego zadania
 			listNewTasks.innerHTML += '<option id="' + taskID + '">' + valueInputAddNewTask + '</option>'; // dodanie nowego zadania do listy nowych zadań do zrobienia
