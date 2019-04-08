@@ -46,12 +46,14 @@ const createNewTaskObject = (id, nameTask, timeCreateTask, timeEndTask, taskStat
 
 //funckja wyszukująca objekt w tablicy
 const searchChooseObjectInTable = (taskID) => {
-  table.forEach((e, id) => {
-      if (e[0] === taskID) {
-          searchID = id;
-          return searchID;
-      }
-  })
+  if(table !== null){
+      table.forEach((e, id) => {
+          if (e[0] === taskID) {
+              searchID = id;
+              return searchID;
+          }
+      })
+  }
 };
 
 // funckja strzałkowa do wyczyszczenia inputa "Wprowadż zadanie"
@@ -193,13 +195,12 @@ const wyswietlSzczegolyLubEdytuj = (e) => { //wyświetla panel ze szczegółami 
             flagButton = e.target.getAttribute('flagbutton');
             flagaSaveEditTask = false;
         }
-    }
-    else {
+    } else {
         flagButton = flagSubmitButton.getAttribute('flagbutton');
         flagSubmitButton = null;
     }
 
-    if (selectTaskID !== null) {
+    if (selectTaskID !== null && table !== null) {
         const x = document.getElementById(selectTaskID);
         searchChooseObjectInTable(x.id);
         if (flagButton === 'moreInfo') {
@@ -272,8 +273,10 @@ formEditTask.addEventListener('submit', saveEditTask, false);
 
 const exitShowMoreInformationAboutSelectTask = () => {
     moreInformationSection.style.display = 'none';
+    editMoreInformationSection.style.display = 'none';
     const afterPanel = document.getElementsByClassName(openPanel);
     afterPanel[0].style.display = 'block';
 };
 
 buttonExitShowMoreInformation.addEventListener('click', exitShowMoreInformationAboutSelectTask, false);
+document.getElementById('exitShowEditInformation').addEventListener('click', exitShowMoreInformationAboutSelectTask, false);
