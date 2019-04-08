@@ -226,7 +226,7 @@ const wyswietlSzczegolyLubEdytuj = (e) => { //wyświetla panel ze szczegółami 
             sectionDoneTasks[0].style.display = 'none';
             sectionDeleteTasks[0].style.display = 'none';
         }
-        else console.log("Coś nie tak!");
+        else alert("Coś nie tak!");
     }else alert('Najpierw wybierz zadanie!');
 };
 
@@ -258,7 +258,6 @@ const saveEditTask = (e) => {
         table[searchID][1]["mail"] = document.getElementById('editTaskMail').value;
         flagSubmitButton = e.target.children[16];
         wyswietlSzczegolyLubEdytuj();
-        console.log('działa');
         flagaSaveEditTask = true;
         return flagaSaveEditTask;
     } else alert("Najpierw wybierz zadanie");
@@ -266,7 +265,7 @@ const saveEditTask = (e) => {
 
 formEditTask.addEventListener('submit', saveEditTask, false);
 
-const exitShowMoreInformationAboutSelectTask = (e) => {
+const exitShowMoreInformationAboutSelectTask = () => {
     moreInformationSection.style.display = 'none';
     const afterPanel = document.getElementsByClassName(openPanel);
     afterPanel[0].style.display = 'block';
