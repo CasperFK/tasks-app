@@ -114,6 +114,7 @@ const moveSelectTask = (taskSelectID, cel, taskStatus) => {
                 table[searchID][1]["task-status"] = taskStatus;
             };
             xz(taskStatus);
+            //dodać dymek w aplikacji o przeniesionym zadaniu
             selectTaskID = null;
         } else alert('Najpierw wybierz zadanie!');
         x.remove(x.selectedIndex);
@@ -140,6 +141,7 @@ document.getElementById('listenClickDeleteTask2').addEventListener("click",delet
 
 document.getElementById('listenClickNewTask3').addEventListener("click", newFunTask3, false);
 document.getElementById('listenClickDoneTask3').addEventListener("click",doneFunTask3, false );
+
 
 
 // sectionNewTasks || sectionDoneTasks || sectionDeleteTasks
@@ -184,26 +186,48 @@ showSectionDeleteTasks[2].addEventListener('click', showChoosePanel, false);
 const wyswietlSzczegolyLubEdytuj = (e) => { //wyświetla panel ze szczegółami o wybranym zadaniu lub panel o edycji wybranego zadania
     // flagbutton="moreInfo" || flagbutton="editInfo" || flagbutton="buttonEditInfoInMoreInfo" || flagbutton="showMoreInfoInEditInfo"
     let flagButton = null;
-    if (flagaSaveEditTask === false ){
-        flagButton = e.target.getAttribute('flagbutton');
-    } else {
-        flagButton = e.getAttribute('flagbutton');
-        flagaSaveEditTask = false;
+    if (flagSubmitButton === null){
+        if (flagaSaveEditTask === false ){
+            flagButton = e.target.getAttribute('flagbutton');
+        } else {
+            flagButton = e.target.getAttribute('flagbutton');
+            flagaSaveEditTask = false;
+        }
     }
-    if (flagButton === 'moreInfo') {
-        moreInformationSection.style.display = 'block'; // =>
-        editMoreInformationSection.style.display = 'none';
-        sectionNewTasks[0].style.display = 'none';
-        sectionDoneTasks[0].style.display = 'none';
-        sectionDeleteTasks[0].style.display = 'none';
+    else {
+        flagButton = flagSubmitButton.getAttribute('flagbutton');
+        flagSubmitButton = null;
     }
-    else if (flagButton === 'editInfo'){
-        moreInformationSection.style.display = 'none';
-        editMoreInformationSection.style.display = 'block'; // =>
-        sectionNewTasks[0].style.display = 'none';
-        sectionDoneTasks[0].style.display = 'none';
-        sectionDeleteTasks[0].style.display = 'none';
-    }
+
+    if (selectTaskID !== null) {
+        const x = document.getElementById(selectTaskID);
+        searchChooseObjectInTable(x.id);
+        if (flagButton === 'moreInfo') {
+            moreInformationSection.style.display = 'block'; // =>
+            editMoreInformationSection.style.display = 'none';
+            sectionNewTasks[0].style.display = 'none';
+            sectionDoneTasks[0].style.display = 'none';
+            sectionDeleteTasks[0].style.display = 'none';
+            document.getElementById('taskTitle').innerHTML = table[searchID][1]["name-task"];
+            document.getElementById('timeAddTask').innerHTML = table[searchID][1]["time-create-task"];
+            document.getElementById('timeCompleteTask').innerHTML = table[searchID][1]["time-end-task"];
+            document.getElementById('taskStatus').innerHTML = table[searchID][1]["task-status"];
+            document.getElementById('moreInfoAboutTask').innerHTML = table[searchID][1]["description"];
+            document.getElementById('taskAutor').innerHTML = table[searchID][1]["autor"];
+            document.getElementById('taskTel').innerHTML = table[searchID][1]["tel"];
+            document.getElementById('taskLink').innerHTML = table[searchID][1]["www"];
+            document.getElementById('taskMail').innerHTML = table[searchID][1]["mail"];
+        }
+        else if (flagButton === 'editInfo'){
+            moreInformationSection.style.display = 'none';
+            editMoreInformationSection.style.display = 'block'; // =>
+            document.getElementById('showEdiTaskTitle').innerHTML = table[searchID][1]["name-task"];
+            sectionNewTasks[0].style.display = 'none';
+            sectionDoneTasks[0].style.display = 'none';
+            sectionDeleteTasks[0].style.display = 'none';
+        }
+        else console.log("Coś nie tak!");
+    }else alert('Najpierw wybierz zadanie!');
 };
 
 buttonEditInformation.addEventListener('click', wyswietlSzczegolyLubEdytuj, false);
@@ -215,11 +239,29 @@ optionWhoShowPanelWithMoreInformationAboutSelectTask[1].addEventListener('click'
 optionWhoShowPanelWithEditorSelectTask[2].addEventListener('click', wyswietlSzczegolyLubEdytuj, false);
 optionWhoShowPanelWithMoreInformationAboutSelectTask[2].addEventListener('click', wyswietlSzczegolyLubEdytuj, false);
 
+let flagSubmitButton = null;
+
 const saveEditTask = (e) => {
     e.preventDefault();
-    flagaSaveEditTask = true;
-    wyswietlSzczegolyLubEdytuj(e.target.children[12]);
-    return flagaSaveEditTask;
+    if (selectTaskID !== null) {
+    const x = document.getElementById(selectTaskID);
+    searchChooseObjectInTable(x.id);
+        table[searchID][1]["name-task"] = document.getElementById('editTaksTitle').value;
+        if (table[searchID][1]["time-create-task"] === document.getElementById('editTimeAddTask').value) {
+            table[searchID][1]["time-create-task"] = document.getElementById('editTimeAddTask').value;
+        }
+        table[searchID][1]["time-end-task"] = document.getElementById('editTimeCompleteTask').value;
+        table[searchID][1]["description"] = document.getElementById('editMoreInfoAboutTask').value;
+        table[searchID][1]["autor"] = document.getElementById('editTaskAutor').value;
+        table[searchID][1]["tel"] = document.getElementById('editTaskTel').value;
+        table[searchID][1]["www"] = document.getElementById('editTaskLink').value;
+        table[searchID][1]["mail"] = document.getElementById('editTaskMail').value;
+        flagSubmitButton = e.target.children[16];
+        wyswietlSzczegolyLubEdytuj();
+        console.log('działa');
+        flagaSaveEditTask = true;
+        return flagaSaveEditTask;
+    } else alert("Najpierw wybierz zadanie");
 };
 
 formEditTask.addEventListener('submit', saveEditTask, false);

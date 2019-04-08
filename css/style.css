@@ -122,7 +122,7 @@ section.sectionDeleteTasks {
     
 }
 
-#moreInformationTask input:nth-child(6) {
+#moreInformationTask input:nth-child(10) {
     height: 50px;
 }
 
