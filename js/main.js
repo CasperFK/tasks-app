@@ -246,9 +246,14 @@ const saveEditTask = (e) => {
     if (selectTaskID !== null) {
     const x = document.getElementById(selectTaskID);
     searchChooseObjectInTable(x.id);
-        table[searchID][1]["name-task"] = document.getElementById('editTaksTitle').value;
-        if (table[searchID][1]["time-create-task"] === document.getElementById('editTimeAddTask').value) {
-            table[searchID][1]["time-create-task"] = document.getElementById('editTimeAddTask').value;
+        if (table[searchID][1]["name-task"] !== document.getElementById('editTaksTitle').value){
+            table[searchID][1]["name-task"] = document.getElementById('editTaksTitle').value;
+            document.getElementById(table[searchID][1]["task-id"]).innerHTML =   document.getElementById('editTaksTitle').value;
+        }
+        if (document.getElementById('editTimeAddTask').value !== ''){
+            if (table[searchID][1]["time-create-task"] !== document.getElementById('editTimeAddTask').value) {
+                table[searchID][1]["time-create-task"] = document.getElementById('editTimeAddTask').value;
+            }
         }
         table[searchID][1]["time-end-task"] = document.getElementById('editTimeCompleteTask').value;
         table[searchID][1]["description"] = document.getElementById('editMoreInfoAboutTask').value;
